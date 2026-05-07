@@ -1,0 +1,6 @@
+{
+  "name": "Navette AI App",
+  "description": "Logistica interna per il calcolo dei tempi di arrivo ottimali fra filiali aziendali.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
