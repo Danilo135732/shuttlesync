@@ -308,6 +308,13 @@ export default function App() {
     setDestination('60');
     syncToCurrentTime();
     setResults(null);
+    
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }, 100);
   };
 
   const calculateResults = () => {
