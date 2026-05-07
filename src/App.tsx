@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   ArrowRight, 
@@ -226,6 +226,7 @@ function PWAInstallModal({ onClose }: { onClose: () => void }) {
 }
 
 export default function App() {
+  const resultsRef = useRef<HTMLDivElement | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [showPWAInfo, setShowPWAInfo] = useState(false);
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
@@ -539,6 +540,14 @@ export default function App() {
       const deadlineB = Math.floor(b.orderDeadline!.getTime() / 60000);
       return deadlineB - deadlineA;
     }));
+
+    // Scroll to results
+    setTimeout(() => {
+      resultsRef.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }, 100);
   };
 
   const formatDate = (date: Date | null) => {
@@ -724,7 +733,7 @@ export default function App() {
         </div>
 
         {/* Column 3: Results Panel - Col 3 (5/12) */}
-        <section className="lg:col-span-5 flex flex-col gap-6">
+        <section ref={resultsRef} className="lg:col-span-5 flex flex-col gap-6 scroll-mt-6">
           <div className="flex items-center justify-between mb-2">
             <h2 className="text-lg font-black tracking-widest text-white select-none">PIANO DI CONSEGNA</h2>
             <div className="bg-[#111111] border border-[#222222] p-2 text-white/20 select-none">...</div>
